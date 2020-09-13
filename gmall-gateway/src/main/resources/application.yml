@@ -1,0 +1,35 @@
+server:
+  port: 8888
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: pms-route
+          uri: lb://pms-service
+          predicates:
+            - Path=/pms/**
+        - id: oms-route
+          uri: lb://oms-service
+          predicates:
+            - Path=/oms/**
+        - id: pms-route
+          uri: lb://wms-service
+          predicates:
+            - Path=/wms/**
+        - id: pms-route
+          uri: lb://wms-service
+          predicates:
+            - Path=/wms/**
+        - id: sms-route
+          uri: lb://sms-service
+          predicates:
+            - Path=/sms/**
+        - id: ums-route
+          uri: lb://ums-service
+          predicates:
+            - Path=/ums/**
+    nacos:
+      discovery:
+        server-addr: 47.107.230.197:8848
+  application:
+    name: gmal-getway
