@@ -1,6 +1,8 @@
 package com.atguigu.gmall.pms.service.impl;
 
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Map;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -25,6 +27,12 @@ public class AttrAttrgroupRelationServiceImpl extends ServiceImpl<AttrAttrgroupR
         );
 
         return new PageVo(page);
+    }
+
+    @Override
+    public void deleteRelation(List<AttrAttrgroupRelationEntity> relationList) {
+        relationList.forEach(relation->
+                this.remove(new QueryWrapper<AttrAttrgroupRelationEntity>().eq("attr_id",relation.getAttrId()).eq("attr_group_id",relation.getAttrGroupId())));
     }
 
 }

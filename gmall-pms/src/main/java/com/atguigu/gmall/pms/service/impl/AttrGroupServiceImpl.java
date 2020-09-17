@@ -1,7 +1,13 @@
 package com.atguigu.gmall.pms.service.impl;
 
 import com.atguigu.core.bean.PageMaker;
+import com.atguigu.gmall.pms.dao.AttrAttrgroupRelationDao;
+import com.atguigu.gmall.pms.dao.AttrDao;
+import com.atguigu.gmall.pms.entity.AttrAttrgroupRelationEntity;
+import com.atguigu.gmall.pms.entity.AttrEntity;
 import com.atguigu.gmall.pms.vo.GroupVO;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -13,12 +19,23 @@ import com.atguigu.core.bean.QueryCondition;
 import com.atguigu.gmall.pms.dao.AttrGroupDao;
 import com.atguigu.gmall.pms.entity.AttrGroupEntity;
 import com.atguigu.gmall.pms.service.AttrGroupService;
+import org.springframework.util.CollectionUtils;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service("attrGroupService")
 public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupDao, AttrGroupEntity> implements AttrGroupService {
+    @Autowired
+    private AttrAttrgroupRelationDao relationDao;
+
+    @Autowired
+    private AttrGroupDao groupDao;
+
+    @Autowired
+    private AttrDao attrDao;
 
     @Override
     public PageVo queryPage(QueryCondition params) {
@@ -43,9 +60,21 @@ public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupDao, AttrGroupEnt
     }
 
     @Override
-    public List<GroupVO> queryGroupWithAttrByGid(Long gid) {
+    public GroupVO queryGroupWithAttrByGid(Long gid) {
+        //查询group
+        GroupVO groupVO = new GroupVO();
+        AttrGroupEntity groupEntity = this.groupDao.selectById(gid);
+        BeanUtils.copyProperties(groupEntity,groupVO);
 
-        return null;
+        //根据gid查询关联关系,获取attrId
+        List<AttrAttrgroupRelationEntity> relations = this.relationDao.selectList(new QueryWrapper<AttrAttrgroupRelationEntity>().eq("attr_group_id", gid));
+        if(CollectionUtils.isEmpty(relations)) return groupVO;
+        groupVO.setRelations(relations);
+        List<Long> attrIds = relations.stream().map(r->r.getAttrId()).collect(Collectors.toList());
+
+        List<AttrEntity> attrEntities = this.attrDao.selectBatchIds(attrIds);
+        groupVO.setAttrEntities(attrEntities);
+        return groupVO;
     }
 
 }

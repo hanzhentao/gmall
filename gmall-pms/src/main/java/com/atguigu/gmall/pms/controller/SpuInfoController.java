@@ -33,6 +33,13 @@ public class SpuInfoController {
     @Autowired
     private SpuInfoService spuInfoService;
 
+    @GetMapping
+    public Resp<PageVo> querySpuInfoById(@RequestParam("catId") Long catId,QueryCondition condition){
+        PageVo pageVo=spuInfoService.querySpuInfoById(catId,condition);
+        if (pageVo == null) return Resp.fail("没有选择分类");
+        return Resp.ok(pageVo);
+    }
+
     /**
      * 列表
      */
