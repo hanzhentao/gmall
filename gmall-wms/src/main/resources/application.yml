@@ -1,5 +1,5 @@
 server:
-  port: 8085
+  port: 8083
 spring:
   cloud:
     nacos:
@@ -7,7 +7,7 @@ spring:
         server-addr: 47.107.230.197:8848
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://rm-bp1eh76n999e95c37so.mysql.rds.aliyuncs.com:3306/guli_sms?useSSL=false
+    url: jdbc:mysql://rm-bp1eh76n999e95c37so.mysql.rds.aliyuncs.com:3306/guli_wms?useSSL=false
     username: home
     password: qq654321
   redis:
@@ -16,4 +16,4 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: auto
-  mapper-locations: classpath:mapper/sms/**/*.xml
+  mapper-locations: classpath:mapper/wms/**/*.xml

@@ -13,6 +13,8 @@ public class GmallCorsConfig {
         // core跨域配置对象
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.addAllowedOrigin("http://localhost:1000");
+        configuration.addAllowedOrigin("http://47.107.230.197:1000");
+        configuration.addAllowedOrigin("http://qingliao.xyz:1000");
         configuration.setAllowCredentials(true);
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");

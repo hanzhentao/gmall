@@ -35,6 +35,12 @@ public class AttrGroupController {
     @Autowired
     private AttrGroupService attrGroupService;
 
+    @GetMapping("withattrs/cat/{catId}")
+    public Resp<List<GroupVO>> queryGroupWithAttrByCid(@PathVariable("catId") Long catId){
+        List<GroupVO> groupVOs = attrGroupService.queryGroupWithAttrByCid(catId);
+        return Resp.ok(groupVOs);
+    }
+
     @GetMapping("withattr/{gid}")
     public Resp<GroupVO> queryGroupWithAttrByGid(@PathVariable("gid") Long gid){
         GroupVO groupVO = attrGroupService.queryGroupWithAttrByGid(gid);

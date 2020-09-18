@@ -21,7 +21,8 @@ import com.atguigu.gmall.pms.entity.AttrGroupEntity;
 import com.atguigu.gmall.pms.service.AttrGroupService;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Collections;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -75,6 +76,19 @@ public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupDao, AttrGroupEnt
         List<AttrEntity> attrEntities = this.attrDao.selectBatchIds(attrIds);
         groupVO.setAttrEntities(attrEntities);
         return groupVO;
+    }
+
+    @Override
+    public List<GroupVO> queryGroupWithAttrByCid(Long catId) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("catelog_id", catId);
+        Collection<AttrGroupEntity> attrGroupEntities = this.listByMap(map);
+        GroupVO groupVO = new GroupVO();
+        List<GroupVO> collect = attrGroupEntities.stream().map(attrGroupEntity ->
+                queryGroupWithAttrByGid(attrGroupEntity.getAttrGroupId())
+        ).collect(Collectors.toList());
+
+        return collect;
     }
 
 }

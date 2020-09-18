@@ -12,11 +12,7 @@ spring:
           uri: lb://oms-service
           predicates:
             - Path=/oms/**
-        - id: pms-route
-          uri: lb://wms-service
-          predicates:
-            - Path=/wms/**
-        - id: pms-route
+        - id: wms-route
           uri: lb://wms-service
           predicates:
             - Path=/wms/**
