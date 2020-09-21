@@ -1,16 +1,13 @@
-package com.atguigu.gmall.pms.vo;
+package vo;
 
-import com.atguigu.gmall.pms.entity.SkuInfoEntity;
-import com.atguigu.gmall.pms.entity.SkuSaleAttrValueEntity;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 @Data
-public class SkuInfoVO extends SkuInfoEntity {
-
+public class SkuSaleVO {
+    private Long SkuId;
     private BigDecimal growBounds;
     private BigDecimal buyBounds;
     private List<Integer> work;
@@ -23,8 +20,4 @@ public class SkuInfoVO extends SkuInfoEntity {
     private BigDecimal fullPrice;
     private BigDecimal reducePrice;
     private Integer fulladdOther;
-
-    private List<SkuSaleAttrValueEntity> saleAttrs;
-
-    private List<String> images;
 }

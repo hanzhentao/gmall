@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.atguigu.gmall.sms.entity.SkuBoundsEntity;
 import com.atguigu.gmall.sms.service.SkuBoundsService;
-
-
+import vo.SkuSaleVO;
 
 
 /**
@@ -33,6 +32,11 @@ public class SkuBoundsController {
     @Autowired
     private SkuBoundsService skuBoundsService;
 
+    @PostMapping("saveSale")
+    public Resp<Object> saveSaleAttr(SkuSaleVO skuSaleVO){
+        skuBoundsService.saveSaleAttr(skuSaleVO);
+        return null;
+    }
     /**
      * 列表
      */
