@@ -16,26 +16,33 @@ import javax.sql.DataSource;
  *
  * @author HelloWoodes
  */
+/*
 @Configuration
 public class DataSourceConfig {
 
-   /* @ConfigurationProperties(prefix = "spring.datasource")
+   */
+/* @ConfigurationProperties(prefix = "spring.datasource")
     public HikariDataSource hikariDataSource(String jdbcUrl) {
         HikariDataSource hikariDataSource = new HikariDataSource();
         hikariDataSource.setJdbcUrl(jdbcUrl);
         return hikariDataSource;
-    }*/
+    }*//*
 
-    /**
+
+    */
+/**
      * 需要将 DataSourceProxy 设置为主数据源，否则事务无法回滚
      *
      * @return The default datasource
-     */
-   /* @Primary
+     *//*
+
+   */
+/* @Primary
     @Bean("dataSource")
     public DataSource dataSource(@Value("spring.datasource.url") String jdbcUrl) {
         return new DataSourceProxy(this.hikariDataSource(jdbcUrl));
-    }*/
+    }*//*
+
     @Primary
     @Bean("dataSource")
     public DataSource dataSource(@Value("${spring.datasource.url}") String jdbcUrl, @Value("${spring.datasource.password}") String password,
@@ -48,3 +55,4 @@ public class DataSourceConfig {
         return new DataSourceProxy(hikariDataSource);
     }
 }
+*/

@@ -3,9 +3,6 @@ package com.atguigu.gmall.pms.dao;
 import com.atguigu.gmall.pms.entity.SpuInfoEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-
-import java.util.List;
 
 /**
  * spu信息

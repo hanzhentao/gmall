@@ -1,7 +1,7 @@
 package com.atguigu.gmall.pms.controller;
 
 import java.util.Arrays;
-import java.util.Map;
+import java.util.List;
 
 
 import com.atguigu.core.bean.PageVo;
@@ -53,6 +53,12 @@ public class SpuInfoController {
         return Resp.ok(page);
     }
 
+    @PostMapping("page")
+    public Resp<List<SpuInfoEntity>> querySpusByPage(@RequestBody QueryCondition queryCondition){
+        PageVo page = spuInfoService.queryPage(queryCondition);
+        List<SpuInfoEntity> spuInfoEntities = (List<SpuInfoEntity>) page.getList();
+        return Resp.ok(spuInfoEntities);
+    }
 
     /**
      * 信息
